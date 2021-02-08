@@ -88,15 +88,14 @@ async function makeReportVariantBestseller(data,variantString) {
 }
 
 //write report to db
-async function writeDocumentToDb(client,data,dbName,collectionName,{...rest}) {
-  client.db(dbName).collection(collectionName).insertOne({[rest.titleString]: {...data}})
+async function writeDocumentToDb(client,data,dbName,collectionName) {
+  client.db(dbName).collection(collectionName).insertOne({['bestSellers']: {...data}})
 }
 
 
 
 //main function to make a report
 (async function () {
-  await client.connect();
 
   const reportSummary = await Promise.all(reportPeriods.map(async period => await makeReportForPeriod(
     period,
@@ -108,7 +107,7 @@ async function writeDocumentToDb(client,data,dbName,collectionName,{...rest}) {
 
   for (let part of reportSummary) {result = {...result, ...part}}
 
-  await writeDocumentToDb(client,result,process.env.MONGODB_DEV_DBNAME,process.env.MONGODB_DEV_REPORT_COLLECTION_NAME,'bestSellers')
+  await writeDocumentToDb(client,result,process.env.MONGODB_DEV_DBNAME,process.env.MONGODB_DEV_REPORT_COLLECTION_NAME)
 
   if (parentPort) parentPort.postMessage("done")
   else process.exit(0);
