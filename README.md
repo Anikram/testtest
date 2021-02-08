@@ -1,17 +1,17 @@
-#Node.JS test app
+# Node.JS test app
 
 Added:
 1. Parser to handle 1mln+ records
 2. Cron job 
 3. REST API Call
    
-###Prerequesites:
+### Prerequesites:
 
 1. Install [MongoDB Community Edition](https://docs.mongodb.com/manual/administration/install-community/)
 2. Install [Node.JS (ver15.4.0)](https://nodejs.org/en/blog/release/v15.4.0/)
 3. Run mongodb
 
-###To start:
+### To start:
 
     cd cron-scheduler/
     yarn install
